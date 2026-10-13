@@ -1,43 +1,83 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="id" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portal Kurikulum Merdeka 2026 - SMPN 1 Kandat</title>
+    <title>Sistem Informasi Kurikulum Merdeka 2026 - SMPN 1 Kandat</title>
+    
+    <!-- Google Fonts & Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- FontAwesome Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            50: '#f5f3ff',
+                            100: '#ede9fe',
+                            200: '#ddd6fe',
+                            500: '#6366f1',
+                            600: '#4f46e5',
+                            700: '#4338ca',
+                            800: '#3730a3',
+                            900: '#312e81',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
-        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+        .bg-grid-pattern {
+            background-color: #f8fafc;
+            background-image: radial-gradient(#cbd5e1 0.8px, transparent 0.8px);
+            background-size: 18px 18px;
+        }
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #f1f5f9; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+        .badge-hover-effect { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
+        .badge-hover-effect:hover { transform: translateY(-4px); box-shadow: 0 12px 24px -6px rgba(79, 70, 229, 0.15); }
+        .page-fade-in { animation: fadeIn 0.35s ease-in-out forwards; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
     </style>
 </head>
-<body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col">
+<body class="font-sans text-slate-800 bg-grid-pattern antialiased min-h-screen flex flex-col selection:bg-emerald-600 selection:text-white">
 
-    <!-- HEADER / NAVBAR -->
-    <header class="bg-emerald-800 text-white shadow-lg sticky top-0 z-50">
+    <!-- HEADER / NAVBAR UTAMA -->
+    <header class="bg-emerald-800 text-white shadow-lg sticky top-0 z-40">
         <div class="max-w-7xl mx-auto px-4 py-3 flex flex-wrap items-center justify-between">
             <div class="flex items-center space-x-3">
                 <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRESVnGGzgEIkf9q6nFxX3TJ2oCPb2g8wWhobdhB6didA&s" 
                      alt="Logo SMPN 1 Kandat" 
-                     class="h-14 w-14 object-contain bg-white rounded-full p-1 shadow">
+                     class="h-12 w-12 object-contain bg-white rounded-full p-1 shadow">
                 <div>
-                    <h1 class="font-bold text-lg md:text-xl tracking-tight">SMP NEGERI 1 KANDAT</h1>
-                    <p class="text-xs text-emerald-200 font-medium">Portal Kurikulum Merdeka Edisi Revisi TA 2026/2027</p>
+                    <h1 class="font-bold text-base md:text-lg tracking-tight leading-tight">SMP NEGERI 1 KANDAT</h1>
+                    <p class="text-xs text-emerald-200 font-medium">Portal Kurikulum Merdeka Edisi Revisi 2026 • Fase D</p>
                 </div>
             </div>
             
             <button onclick="toggleMobileMenu()" class="md:hidden text-white hover:text-emerald-200 focus:outline-none">
-                <i class="fa-solid fa-bars text-2xl"></i>
+                <i class="fa-solid fa-bars text-xl"></i>
             </button>
 
-            <nav id="nav-menu" class="hidden md:flex space-x-1 w-full md:w-auto mt-3 md:mt-0">
-                <button onclick="switchTab('beranda')" id="btn-beranda" class="tab-btn active-tab px-4 py-2 rounded-lg text-sm font-semibold transition bg-emerald-700 text-white">Beranda</button>
-                <button onclick="switchTab('intrakurikuler')" id="btn-intrakurikuler" class="tab-btn px-4 py-2 rounded-lg text-sm font-semibold transition hover:bg-emerald-700 hover:text-white">Intrakurikuler</button>
-                <button onclick="switchTab('kokurikuler')" id="btn-kokurikuler" class="tab-btn px-4 py-2 rounded-lg text-sm font-semibold transition hover:bg-emerald-700 hover:text-white">Kokurikuler (3 Pilar)</button>
-                <button onclick="switchTab('ekstrakurikuler')" id="btn-ekstrakurikuler" class="tab-btn px-4 py-2 rounded-lg text-sm font-semibold transition hover:bg-emerald-700 hover:text-white">Ekstrakurikuler</button>
-                <button onclick="switchTab('kalkulator')" id="btn-kalkulator" class="tab-btn px-4 py-2 rounded-lg text-sm font-semibold transition bg-amber-500 hover:bg-amber-600 text-slate-900 font-bold ml-2">
+            <nav id="nav-menu" class="hidden md:flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-1 w-full md:w-auto mt-3 md:mt-0 text-xs md:text-sm">
+                <button onclick="switchTab('beranda')" id="btn-beranda" class="tab-btn px-3 py-2 rounded-lg font-semibold transition bg-emerald-700 text-white">Beranda</button>
+                <button onclick="switchTab('intrakurikuler')" id="btn-intrakurikuler" class="tab-btn px-3 py-2 rounded-lg font-semibold transition hover:bg-emerald-700 hover:text-white">Intrakurikuler</button>
+                <button onclick="switchTab('kokurikuler')" id="btn-kokurikuler" class="tab-btn px-3 py-2 rounded-lg font-semibold transition hover:bg-emerald-700 hover:text-white">Kokurikuler (3 Pilar)</button>
+                <button onclick="switchTab('ekstrakurikuler')" id="btn-ekstrakurikuler" class="tab-btn px-3 py-2 rounded-lg font-semibold transition hover:bg-emerald-700 hover:text-white">Ekstrakurikuler</button>
+                <button onclick="switchTab('kalkulator')" id="btn-kalkulator" class="tab-btn px-3 py-2 rounded-lg font-bold transition bg-amber-400 hover:bg-amber-500 text-slate-900">
                     <i class="fa-solid fa-calculator mr-1"></i> Rubrik Asesmen
                 </button>
             </nav>
@@ -45,255 +85,456 @@
     </header>
 
     <!-- HERO BANNER -->
-    <section class="bg-gradient-to-r from-emerald-900 via-teal-800 to-emerald-700 text-white py-8 px-4 border-b border-emerald-600">
-        <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
-            <div class="space-y-2 text-center md:text-left">
-                <span class="bg-amber-400 text-slate-900 text-xs font-extrabold uppercase px-3 py-1 rounded-full inline-block">TA 2026 / 2027</span>
-                <h2 class="text-2xl md:text-4xl font-extrabold leading-tight">Panduan Lengkap Program Kokurikuler Spensaka</h2>
-                <p class="text-emerald-100 text-sm md:text-base max-w-2xl">
-                    Implementasi 3 Pilar Utama Kokurikuler: Lintas Disiplin Ilmu, Budaya 7 KAIH, & Kearifan Lokal Berbasis Digital AI.
+    <section class="bg-gradient-to-r from-emerald-900 via-teal-800 to-emerald-700 text-white py-6 px-4 border-b border-emerald-600 shadow-inner">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
+            <div class="space-y-1.5 text-center md:text-left">
+                <span class="bg-amber-400 text-slate-900 text-[10px] font-extrabold uppercase px-2.5 py-0.5 rounded-full inline-block">TA 2026 / 2027 • FASE D</span>
+                <h2 class="text-xl md:text-3xl font-extrabold leading-tight">Menuju Generasi Unggul, Berkarakter & Digital</h2>
+                <p class="text-emerald-100 text-xs md:text-sm max-w-2xl">
+                    "Terwujudnya Peserta Didik yang Agamis, Berprestasi, Peduli Lingkungan, dan Inovatif melalui Pembelajaran Mendalam Berbasis Karakter"
                 </p>
             </div>
-            <div class="bg-white/10 backdrop-blur-md p-4 rounded-xl border border-white/20 text-center min-w-[220px]">
-                <i class="fa-solid fa-seedling text-3xl text-amber-300 mb-1"></i>
-                <div class="text-lg font-bold">Gelar Karya</div>
-                <div class="text-xs text-emerald-200">Bulan Mei 2027</div>
+            <div class="bg-white/10 backdrop-blur-md px-4 py-3 rounded-xl border border-white/20 text-center min-w-[200px]">
+                <i class="fa-solid fa-graduation-cap text-2xl text-amber-300 mb-1"></i>
+                <div class="text-lg font-bold">SPENSAKA JAYA</div>
+                <div class="text-[11px] text-emerald-200">Agamis • Berprestasi • ASRI</div>
             </div>
         </div>
     </section>
 
-    <!-- MAIN CONTENT -->
+    <!-- MAIN CONTAINER -->
     <main class="max-w-7xl mx-auto px-4 py-8 flex-grow w-full">
 
-        <!-- TAB BERANDA -->
+        <!-- TAB 1: BERANDA -->
         <div id="tab-beranda" class="tab-content space-y-8">
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 hover:shadow-md transition">
                     <div class="w-12 h-12 bg-emerald-100 text-emerald-700 rounded-xl flex items-center justify-center mb-4 text-xl">
                         <i class="fa-solid fa-book-open-reader"></i>
                     </div>
                     <h3 class="font-bold text-lg text-slate-800 mb-2">1. Intrakurikuler</h3>
-                    <p class="text-slate-600 text-sm leading-relaxed">Focus pada materi esensial melalui pendekatan <i>Deep Learning</i> (Mindful, Meaningful, & Joyful) untuk daya nalar tinggi.</p>
+                    <p class="text-slate-600 text-xs leading-relaxed">
+                        Fokus pada materi esensial melalui pendekatan <i>Deep Learning</i> (Mindful, Meaningful, & Joyful Learning) untuk daya nalar kritis Fase D.
+                    </p>
                 </div>
 
-                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 border-l-4 border-l-emerald-600">
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 hover:shadow-md transition border-l-4 border-l-emerald-600">
                     <div class="w-12 h-12 bg-amber-100 text-amber-700 rounded-xl flex items-center justify-center mb-4 text-xl">
-                        <i class="fa-solid fa-layer-group"></i>
+                        <i class="fa-solid fa-diagram-project"></i>
                     </div>
-                    <h3 class="font-bold text-lg text-slate-800 mb-2">2. Kokurikuler 3 Pilar</h3>
-                    <p class="text-slate-600 text-sm leading-relaxed">Penguatan Dimensi Profil Lulusan melalui 3 Pilar utama: ASRI, 7 KAIH, dan Digitalisasi Budaya Lokal.</p>
+                    <h3 class="font-bold text-lg text-slate-800 mb-2">2. Kokurikuler (3 Pilar)</h3>
+                    <p class="text-slate-600 text-xs leading-relaxed">
+                        Penyempurnaan P5 menjadi Kegiatan Kokurikuler berbasis <b>Dimensi Profil Lulusan</b> (Sekolah ASRI, 7 KAIH, & Keunikan Kediri + AI).
+                    </p>
                 </div>
 
-                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 hover:shadow-md transition">
                     <div class="w-12 h-12 bg-purple-100 text-purple-700 rounded-xl flex items-center justify-center mb-4 text-xl">
                         <i class="fa-solid fa-icons"></i>
                     </div>
                     <h3 class="font-bold text-lg text-slate-800 mb-2">3. Ekstrakurikuler</h3>
-                    <p class="text-slate-600 text-sm leading-relaxed">Pengembangan bakat, seni, olahraga, pramuka, dan minat kepemimpinan non-akademik siswa.</p>
+                    <p class="text-slate-600 text-xs leading-relaxed">
+                        Wadah eksplorasi minat, bakat, olahraga, seni, dan keorganisasian dengan sistem registrasi interaktif berbasis digital.
+                    </p>
+                </div>
+            </div>
+
+            <div class="bg-emerald-900 text-white p-8 rounded-2xl shadow-md">
+                <div class="max-w-3xl">
+                    <span class="text-amber-400 font-semibold text-xs tracking-widest uppercase">Blueprint Kurikulum 2026/2027</span>
+                    <h3 class="text-2xl font-bold mt-1 mb-4">Pendidikan Karakter & Kompetensi Masa Depan di SMPN 1 Kandat</h3>
+                    <p class="text-emerald-100 text-xs md:text-sm leading-relaxed mb-6">
+                        SMP Negeri 1 Kandat mengintegrasikan kecerdasan akademis dengan pembentukan karakter religius, kepedulian terhadap lingkungan hidup (Sekolah ASRI), kearifan lokal Kediri, serta pemanfaatan teknologi digital secara bijak.
+                    </p>
+                    <div class="flex flex-wrap gap-3">
+                        <button onclick="switchTab('kokurikuler')" class="bg-amber-400 text-slate-900 font-bold px-5 py-2.5 rounded-lg text-xs md:text-sm hover:bg-amber-300 transition">
+                            Eksplorasi Program Kokurikuler <i class="fa-solid fa-arrow-right ml-1"></i>
+                        </button>
+                        <button onclick="switchTab('intrakurikuler')" class="bg-emerald-800 border border-emerald-600 text-white font-bold px-5 py-2.5 rounded-lg text-xs md:text-sm hover:bg-emerald-700 transition">
+                            Detail Intrakurikuler
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <!-- TAB INTRAKURIKULER -->
-        <div id="tab-intrakurikuler" class="tab-content hidden space-y-6">
+        <!-- TAB 2: INTRAKURIKULER -->
+        <div id="tab-intrakurikuler" class="tab-content hidden space-y-8">
             <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
-                <h3 class="text-xl font-bold text-emerald-800 mb-4 flex items-center gap-2">
-                    <i class="fa-solid fa-brain"></i> Intrakurikuler Berbasis Deep Learning
+                <h3 class="text-xl font-bold text-emerald-800 mb-2 flex items-center gap-2">
+                    <i class="fa-solid fa-brain"></i> Struktur & Pendekatan Intrakurikuler Fase D (Revisi 2026)
                 </h3>
-                <p class="text-slate-600 text-sm leading-relaxed">
-                    Intrakurikuler edisi revisi 2026 mengutamakan kedalaman pemahaman materi esensial secara bermakna dan menyenangkan.
+                <p class="text-slate-600 text-xs md:text-sm leading-relaxed">
+                    Pembelajaran intrakurikuler pada Edisi Revisi 2026 berfokus pada penguasaan materi esensial secara mendalam (*Deep Learning*), alih-alih mengejar kuantitas materi. Sistem ini dirancang fleksibel untuk merangsang penalaran kritis, pemecahan masalah, serta literasi-numerasi siswa SMPN 1 Kandat.
                 </p>
             </div>
-        </div>
 
-        <!-- TAB KOKURIKULER (UPDATE LENGKAP PANDUAN POKOK) -->
-        <div id="tab-kokurikuler" class="tab-content hidden space-y-8">
-            <div class="text-center max-w-3xl mx-auto">
-                <span class="bg-emerald-100 text-emerald-800 text-xs font-extrabold uppercase px-3 py-1 rounded-full">Panduan Resmi Spensaka</span>
-                <h3 class="text-2xl md:text-3xl font-extrabold text-slate-800 mt-2">Program Unggulan Kokurikuler 3 Pilar</h3>
-                <p class="text-slate-600 text-sm mt-1">Struktur Pelaksanaan, Alokasi Waktu, dan Integrasi Mata Pelajaran TA 2026/2027</p>
-            </div>
-
-            <!-- CARDS 3 PILAR DETAIL -->
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <!-- PILAR 1 -->
-                <div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden flex flex-col">
-                    <div class="bg-emerald-800 text-white p-5">
-                        <div class="flex justify-between items-center">
-                            <span class="text-xs font-bold uppercase bg-emerald-950/60 px-2.5 py-1 rounded text-emerald-300">Pilar 1</span>
-                            <span class="text-xs bg-amber-400 text-slate-900 font-bold px-2 py-0.5 rounded">Blok Sep-Okt 2026 (72 JP)</span>
-                        </div>
-                        <h4 class="font-bold text-lg mt-3">Sekolah ASRI & Berkelanjutan</h4>
-                        <p class="text-xs text-emerald-200 mt-1">Lintas Disiplin Ilmu (Peduli Lingkungan)</p>
+                <div class="bg-white p-5 rounded-2xl shadow-sm border border-emerald-100 border-t-4 border-t-emerald-600">
+                    <div class="text-emerald-700 font-bold text-base mb-2 flex items-center gap-2">
+                        <i class="fa-solid fa-heart"></i> Mindful Learning
                     </div>
-                    <div class="p-5 space-y-4 flex-grow text-sm text-slate-600">
-                        <div>
-                            <div class="text-xs font-bold text-slate-800 uppercase mb-1">Mata Pelajaran Terintegrasi:</div>
-                            <span class="inline-block bg-slate-100 text-slate-700 text-xs px-2 py-1 rounded mr-1 mb-1">IPA</span>
-                            <span class="inline-block bg-slate-100 text-slate-700 text-xs px-2 py-1 rounded mr-1 mb-1">Matematika</span>
-                            <span class="inline-block bg-slate-100 text-slate-700 text-xs px-2 py-1 rounded mr-1 mb-1">IPS</span>
-                            <span class="inline-block bg-slate-100 text-slate-700 text-xs px-2 py-1 rounded">Bahasa Indonesia</span>
-                        </div>
-                        <div>
-                            <div class="text-xs font-bold text-slate-800 uppercase mb-1">Kegiatan Utama:</div>
-                            <ul class="list-disc pl-4 space-y-1 text-xs">
-                                <li>Riset & Auditing Debit Sampah & Vegetasi Sekolah</li>
-                                <li>Pengelolaan Bank Sampah Digital & Komposting</li>
-                                <li>Gerakan 3R & Zero Plastic Zone</li>
-                                <li>Laboratorium Hidroponik & Tanaman Obat (Toga)</li>
-                            </ul>
-                        </div>
-                        <div class="border-t pt-2 text-xs">
-                            <span class="font-bold text-slate-700">Dimensi Lulusan:</span> Penalaran Kritis, Kolaborasi, Kewargaan.
-                        </div>
-                    </div>
+                    <p class="text-slate-600 text-xs leading-relaxed">
+                        Siswa disadarkan akan tujuan belajar, aktif mengelola emosi dan fokus saat KBM, serta memahami mengapa suatu konsep penting dipelajari bagi kehidupannya.
+                    </p>
                 </div>
-
-                <!-- PILAR 2 -->
-                <div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden flex flex-col">
-                    <div class="bg-amber-600 text-white p-5">
-                        <div class="flex justify-between items-center">
-                            <span class="text-xs font-bold uppercase bg-amber-950/50 px-2.5 py-1 rounded text-amber-200">Pilar 2</span>
-                            <span class="text-xs bg-white text-slate-900 font-bold px-2 py-0.5 rounded">Reguler (Sepanjang TA)</span>
-                        </div>
-                        <h4 class="font-bold text-lg mt-3">Religiusitas & Pembiasaan 7 KAIH</h4>
-                        <p class="text-xs text-amber-100 mt-1">Pembiasaan Budaya Positif Sekolah</p>
+                <div class="bg-white p-5 rounded-2xl shadow-sm border border-emerald-100 border-t-4 border-t-amber-500">
+                    <div class="text-amber-600 font-bold text-base mb-2 flex items-center gap-2">
+                        <i class="fa-solid fa-lightbulb"></i> Meaningful Learning
                     </div>
-                    <div class="p-5 space-y-4 flex-grow text-sm text-slate-600">
-                        <div>
-                            <div class="text-xs font-bold text-slate-800 uppercase mb-1">Mata Pelajaran Terintegrasi:</div>
-                            <span class="inline-block bg-slate-100 text-slate-700 text-xs px-2 py-1 rounded mr-1 mb-1">PAI & Budi Pekerti</span>
-                            <span class="inline-block bg-slate-100 text-slate-700 text-xs px-2 py-1 rounded mr-1 mb-1">PPKn</span>
-                            <span class="inline-block bg-slate-100 text-slate-700 text-xs px-2 py-1 rounded">PJOK</span>
-                        </div>
-                        <div>
-                            <div class="text-xs font-bold text-slate-800 uppercase mb-1">Kegiatan Utama:</div>
-                            <ul class="list-disc pl-4 space-y-1 text-xs">
-                                <li>Pembiasaan Sholat Dhuha & Dzuhur Berjamaah</li>
-                                <li>Kultum & Literasi Keagamaan Bergilir</li>
-                                <li>Operasi Semut (Kebersihan Harian)</li>
-                                <li>Piket Harmoni, Budaya Antre & Tegur Sapa</li>
-                            </ul>
-                        </div>
-                        <div class="border-t pt-2 text-xs">
-                            <span class="font-bold text-slate-700">Dimensi Lulusan:</span> Keimanan & Ketakwaan, Kewargaan.
-                        </div>
-                    </div>
+                    <p class="text-slate-600 text-xs leading-relaxed">
+                        Materi dikaitkan langsung dengan studi kasus nyata di lingkungan sekitar Kandat/Kediri, tantangan teknologi AI, serta isu-isu keberlanjutan global.
+                    </p>
                 </div>
-
-                <!-- PILAR 3 -->
-                <div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden flex flex-col">
-                    <div class="bg-indigo-700 text-white p-5">
-                        <div class="flex justify-between items-center">
-                            <span class="text-xs font-bold uppercase bg-indigo-950/60 px-2.5 py-1 rounded text-indigo-200">Pilar 3</span>
-                            <span class="text-xs bg-amber-400 text-slate-900 font-bold px-2 py-0.5 rounded">Blok Feb-Mar 2027 (72 JP)</span>
-                        </div>
-                        <h4 class="font-bold text-lg mt-3">Jejak Peradaban Jawa & AI</h4>
-                        <p class="text-xs text-indigo-200 mt-1">Keunikan Lokal & Digitalisasi Budaya</p>
+                <div class="bg-white p-5 rounded-2xl shadow-sm border border-emerald-100 border-t-4 border-t-indigo-600">
+                    <div class="text-indigo-600 font-bold text-base mb-2 flex items-center gap-2">
+                        <i class="fa-solid fa-face-smile"></i> Joyful Learning
                     </div>
-                    <div class="p-5 space-y-4 flex-grow text-sm text-slate-600">
-                        <div>
-                            <div class="text-xs font-bold text-slate-800 uppercase mb-1">Mata Pelajaran Terintegrasi:</div>
-                            <span class="inline-block bg-slate-100 text-slate-700 text-xs px-2 py-1 rounded mr-1 mb-1">Bahasa Jawa</span>
-                            <span class="inline-block bg-slate-100 text-slate-700 text-xs px-2 py-1 rounded mr-1 mb-1">Seni Budaya</span>
-                            <span class="inline-block bg-slate-100 text-slate-700 text-xs px-2 py-1 rounded mr-1 mb-1">Informatika</span>
-                            <span class="inline-block bg-slate-100 text-slate-700 text-xs px-2 py-1 rounded">Sejarah / IPS</span>
-                        </div>
-                        <div>
-                            <div class="text-xs font-bold text-slate-800 uppercase mb-1">Kegiatan Utama:</div>
-                            <ul class="list-disc pl-4 space-y-1 text-xs">
-                                <li>Eksplorasi Sejarah & Situs Candi Kediri</li>
-                                <li>Pelatihan Karawitan, Tari Tradisional, & Pedalangan</li>
-                                <li>Penerapan Unggah-Ungguh Basa Jawa</li>
-                                <li>Digitalisasi Budaya dengan AI (Dokumenter & E-Majalah)</li>
-                            </ul>
-                        </div>
-                        <div class="border-t pt-2 text-xs">
-                            <span class="font-bold text-slate-700">Dimensi Lulusan:</span> Kewargaan, Kreativitas, Komunikasi.
-                        </div>
-                    </div>
+                    <p class="text-slate-600 text-xs leading-relaxed">
+                        Penggunaan metode interaktif, game edukasi, praktikum sains/IT, serta suasana kelas yang ramah anak, menghargai keberagaman cara belajar siswa.
+                    </p>
                 </div>
             </div>
 
-            <!-- TABEL JADWAL & OPERASIONAL -->
-            <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 overflow-x-auto">
-                <h4 class="font-bold text-slate-800 text-base mb-4 flex items-center gap-2">
-                    <i class="fa-solid fa-calendar-check text-emerald-600"></i> Matriks Operasional Kokurikuler TA 2026/2027
-                </h4>
-                <table class="w-full text-left text-xs border-collapse">
-                    <thead>
-                        <tr class="bg-slate-100 text-slate-700 border-b">
-                            <th class="p-3 font-bold">Pilar / Tema</th>
-                            <th class="p-3 font-bold">Alokasi Waktu</th>
-                            <th class="p-3 font-bold">Mapel Terintegrasi</th>
-                            <th class="p-3 font-bold">Penanggung Jawab</th>
-                        </tr>
-                    </thead>
-                    <tbody class="divide-y divide-slate-200">
-                        <tr>
-                            <td class="p-3 font-semibold text-emerald-800">Pilar 1: Sekolah ASRI</td>
-                            <td class="p-3">Blok Sep - Okt 2026 (72 JP)</td>
-                            <td class="p-3">IPA, Matematika, IPS, Bahasa Indonesia</td>
-                            <td class="p-3">Tim Pembina Lingkungan & Koordinator IPA</td>
-                        </tr>
-                        <tr>
-                            <td class="p-3 font-semibold text-amber-700">Pilar 2: Religiusitas & 7 KAIH</td>
-                            <td class="p-3">Reguler Sepanjang TA</td>
-                            <td class="p-3">PAI & Budi Pekerti, PPKn, PJOK</td>
-                            <td class="p-3">Tim Keagamaan & Tim Kesiswaan</td>
-                        </tr>
-                        <tr>
-                            <td class="p-3 font-semibold text-indigo-800">Pilar 3: Peradaban Jawa & AI</td>
-                            <td class="p-3">Blok Feb - Mar 2027 (72 JP)</td>
-                            <td class="p-3">Bahasa Jawa, Seni Budaya, Informatika, Sejarah</td>
-                            <td class="p-3">Tim Pembina Seni Budaya & Komunitas IT</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-
-            <!-- GELAR KARYA (MEI 2027) -->
-            <div class="bg-gradient-to-r from-emerald-900 to-teal-900 text-white p-6 rounded-2xl shadow-md">
-                <div class="flex flex-col md:flex-row items-center justify-between gap-6">
-                    <div class="space-y-2">
-                        <span class="bg-amber-400 text-slate-900 text-xs font-extrabold uppercase px-2.5 py-0.5 rounded">Puncak Kegiatan</span>
-                        <h4 class="text-xl font-bold">Gelar Karya Kokurikuler (Mei 2027)</h4>
-                        <p class="text-xs text-emerald-100 leading-relaxed max-w-xl">
-                            Mengusung tema <b>"Pesta Budaya & Inovasi Lingkungan Kandat"</b>. Menampilkan Pameran Inovasi ASRI, Pertunjukan Seni Karawitan Live, Digital Culture Expo berbasis AI, dan Penghargaan 7 KAIH Awards.
-                        </p>
-                    </div>
-                    <div class="bg-white/10 p-4 rounded-xl border border-white/20 text-center min-w-[180px]">
-                        <i class="fa-solid fa-trophy text-2xl text-amber-300 mb-1"></i>
-                        <div class="text-xs font-bold">7 KAIH Awards</div>
-                        <div class="text-[10px] text-emerald-200">Apresiasi Siswa & Kelas Teladan</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- TAB EKSTRAKURIKULER -->
-        <div id="tab-ekstrakurikuler" class="tab-content hidden space-y-6">
             <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
-                <h3 class="text-xl font-bold text-slate-800 mb-4"><i class="fa-solid fa-star text-amber-500 mr-2"></i>Kegiatan Ekstrakurikuler</h3>
-                <p class="text-xs text-slate-600 mb-4">Mewadahi bakat, minat, dan potensi non-akademik siswa Spensaka.</p>
+                <h4 class="font-bold text-base text-slate-800 mb-4 flex items-center gap-2">
+                    <i class="fa-solid fa-clock text-emerald-600"></i> Struktur Mata Pelajaran & Alokasi Beban Belajar Fase D
+                </h4>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left text-xs text-slate-700 border-collapse">
+                        <thead>
+                            <tr class="bg-emerald-800 text-white uppercase text-[11px] tracking-wider">
+                                <th class="p-3 rounded-tl-lg">Mata Pelajaran Wajib</th>
+                                <th class="p-3">Alokasi Intrakurikuler / Minggu</th>
+                                <th class="p-3">Alokasi Kokurikuler / Minggu</th>
+                                <th class="p-3 rounded-tr-lg">Total JP / Minggu</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-200">
+                            <tr class="hover:bg-slate-50">
+                                <td class="p-3 font-semibold">Pendidikan Agama & Budi Pekerti</td>
+                                <td class="p-3">2 JP</td>
+                                <td class="p-3">1 JP</td>
+                                <td class="p-3 font-bold text-emerald-700">3 JP</td>
+                            </tr>
+                            <tr class="hover:bg-slate-50">
+                                <td class="p-3 font-semibold">Pendidikan Pancasila / PPKn</td>
+                                <td class="p-3">2 JP</td>
+                                <td class="p-3">1 JP</td>
+                                <td class="p-3 font-bold text-emerald-700">3 JP</td>
+                            </tr>
+                            <tr class="hover:bg-slate-50">
+                                <td class="p-3 font-semibold">Bahasa Indonesia</td>
+                                <td class="p-3">5 JP</td>
+                                <td class="p-3">1 JP</td>
+                                <td class="p-3 font-bold text-emerald-700">6 JP</td>
+                            </tr>
+                            <tr class="hover:bg-slate-50">
+                                <td class="p-3 font-semibold">Matematika</td>
+                                <td class="p-3">4 JP</td>
+                                <td class="p-3">1 JP</td>
+                                <td class="p-3 font-bold text-emerald-700">5 JP</td>
+                            </tr>
+                            <tr class="hover:bg-slate-50">
+                                <td class="p-3 font-semibold">IPA (Ilmu Pengetahuan Alam)</td>
+                                <td class="p-3">4 JP</td>
+                                <td class="p-3">1 JP</td>
+                                <td class="p-3 font-bold text-emerald-700">5 JP</td>
+                            </tr>
+                            <tr class="hover:bg-slate-50">
+                                <td class="p-3 font-semibold">IPS (Ilmu Pengetahuan Sosial)</td>
+                                <td class="p-3">3 JP</td>
+                                <td class="p-3">1 JP</td>
+                                <td class="p-3 font-bold text-emerald-700">4 JP</td>
+                            </tr>
+                            <tr class="hover:bg-slate-50">
+                                <td class="p-3 font-semibold">Bahasa Inggris</td>
+                                <td class="p-3">3 JP</td>
+                                <td class="p-3">1 JP</td>
+                                <td class="p-3 font-bold text-emerald-700">4 JP</td>
+                            </tr>
+                            <tr class="hover:bg-slate-50">
+                                <td class="p-3 font-semibold">PJOK (Pendidikan Jasmani, Olahraga & Kesehatan)</td>
+                                <td class="p-3">2 JP</td>
+                                <td class="p-3">1 JP</td>
+                                <td class="p-3 font-bold text-emerald-700">3 JP</td>
+                            </tr>
+                            <tr class="hover:bg-slate-50">
+                                <td class="p-3 font-semibold">Informatika & Komputer</td>
+                                <td class="p-3">2 JP</td>
+                                <td class="p-3">1 JP</td>
+                                <td class="p-3 font-bold text-emerald-700">3 JP</td>
+                            </tr>
+                            <tr class="hover:bg-slate-50">
+                                <td class="p-3 font-semibold">Muatan Lokal (Bahasa Jawa & Seni Budaya)</td>
+                                <td class="p-3">2 JP</td>
+                                <td class="p-3">-</td>
+                                <td class="p-3 font-bold text-emerald-700">2 JP</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
 
-        <!-- TAB KALKULATOR RUBRIK -->
+        <!-- TAB 3: KOKURIKULER (3 PILAR) -->
+        <div id="tab-kokurikuler" class="tab-content hidden space-y-8">
+            <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
+                <span class="bg-emerald-100 text-emerald-800 text-xs font-bold px-3 py-1 rounded-full uppercase">Dokumen Resmi Blueprint 2026/2027</span>
+                <h3 class="text-xl md:text-2xl font-bold text-slate-800 mt-2 mb-2">Panduan Lengkap Program Kokurikuler SMPN 1 Kandat</h3>
+                <p class="text-slate-600 text-xs md:text-sm leading-relaxed">
+                    Penguatan karakter dan Dimensi Profil Lulusan diwadahi dalam **3 Pilar Utama Kokurikuler** yang menggantikan skema P5 terdahulu. Program ini berbasis isu lingkungan nyata, budaya 7 KAIH, serta kearifan lokal Kediri yang dikombinasikan dengan inovasi teknologi digital.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Pilar 1 -->
+                <div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden flex flex-col">
+                    <div class="bg-emerald-800 text-white p-4">
+                        <span class="text-[10px] font-bold uppercase tracking-wider bg-emerald-950/60 px-2.5 py-1 rounded">Pilar 1 • Peduli Lingkungan</span>
+                        <h4 class="font-bold text-base mt-2">Sekolah ASRI & Berkelanjutan</h4>
+                        <p class="text-[11px] text-emerald-200 mt-1">Dimensi: Penalaran Kritis, Kolaborasi, Kewargaan</p>
+                    </div>
+                    <div class="p-5 space-y-3 flex-grow text-xs text-slate-600">
+                        <p class="font-semibold text-slate-800">Rincian Kegiatan Utama:</p>
+                        <ul class="list-disc pl-4 space-y-1.5">
+                            <li><b>Riset & Auditing Lingkungan:</b> Tim peneliti siswa mengukur debit sampah harian dan memetakan vegetasi sekolah.</li>
+                            <li><b>Bank Sampah Digital:</b> Pencatatan dan komposting daur ulang bernilai ekonomi.</li>
+                            <li><b>Gerakan 3R & Zero Plastic:</b> Inovasi pemanfaatan limbah menjadi produk daur ulang interaktif.</li>
+                            <li><b>Laboratorium Hidroponik:</b> Penanaman Toga dan hidroponik berbasis studi sains biologis.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Pilar 2 -->
+                <div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden flex flex-col">
+                    <div class="bg-amber-700 text-white p-4">
+                        <span class="text-[10px] font-bold uppercase tracking-wider bg-amber-950/60 px-2.5 py-1 rounded">Pilar 2 • Budaya Positif</span>
+                        <h4 class="font-bold text-base mt-2">Religiusitas & 7 KAIH</h4>
+                        <p class="text-[11px] text-amber-200 mt-1">Dimensi: Keimanan & Ketakwaan, Kewargaan</p>
+                    </div>
+                    <div class="p-5 space-y-3 flex-grow text-xs text-slate-600">
+                        <p class="font-semibold text-slate-800">Rincian Kegiatan Utama:</p>
+                        <ul class="list-disc pl-4 space-y-1.5">
+                            <li><b>Ibadah Berjamaah:</b> Sholat Dhuha, Dzuhur berjamaah, dan Doa Bersama secara teratur.</li>
+                            <li><b>Kultum & Literasi Moral:</b> Penjadwalan ceramah singkat bergilir oleh siswa.</li>
+                            <li><b>Gerakan 7 KAIH Harian:</b> Operasi Semut (Kebersihan), Piket Harmoni (Keindahan & Kekeluargaan), Budaya Antre & Tegur Sapa.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Pilar 3 -->
+                <div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden flex flex-col">
+                    <div class="bg-indigo-800 text-white p-4">
+                        <span class="text-[10px] font-bold uppercase tracking-wider bg-indigo-950/60 px-2.5 py-1 rounded">Pilar 3 • Budaya & Digital</span>
+                        <h4 class="font-bold text-base mt-2">Jejak Peradaban Jawa & AI</h4>
+                        <p class="text-[11px] text-indigo-200 mt-1">Dimensi: Kewargaan, Kreativitas, Komunikasi</p>
+                    </div>
+                    <div class="p-5 space-y-3 flex-grow text-xs text-slate-600">
+                        <p class="font-semibold text-slate-800">Rincian Kegiatan Utama:</p>
+                        <ul class="list-disc pl-4 space-y-1.5">
+                            <li><b>Eksplorasi Situs Candi Kediri:</b> Observasi sejarah dan warisan lokal Kediri.</li>
+                            <li><b>Sanggar Seni Tradisi:</b> Pelatihan intensif Karawitan, Seni Tari, dan Pedalangan.</li>
+                            <li><b>Unggah-Ungguh Basa Jawa:</b> Pembiasaan Basa Jawa Halus di hari tertentu.</li>
+                            <li><b>Digitalisasi AI:</b> Pembuatan film pendek dokumenter & konten promosi budaya berbasis AI.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB 4: EKSTRAKURIKULER (DIGABUNGKAN DENGAN PORTAL INTERAKTIF TERBARU) -->
+        <div id="tab-ekstrakurikuler" class="tab-content hidden space-y-8">
+            
+            <!-- LIST VIEW (MODUL PORTAL EKSTRAKURIKULER SPENSAKA) -->
+            <section id="ekstra-list-view" class="page-fade-in space-y-6">
+                <div class="space-y-2">
+                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-100 text-brand-700 text-xs font-semibold uppercase tracking-wider">
+                        <i class="fa-solid fa-shapes text-xs"></i>
+                        <span>Kegiatan Ekstrakurikuler Spensaka</span>
+                    </div>
+                    <div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+                        <div>
+                            <h2 class="text-2xl md:text-3xl font-extrabold text-slate-900 tracking-tight">
+                                Katalog Ekstrakurikuler Sekolah
+                            </h2>
+                            <p class="text-slate-600 text-xs md:text-sm mt-1 max-w-2xl">
+                                Wadah pengembangan minat, bakat, dan kreativitas siswa di luar kegiatan akademik SMP Negeri 1 Kandat.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Filter & Search Bar -->
+                <div class="bg-white p-4 rounded-2xl shadow-sm border border-slate-200/80 space-y-4">
+                    <div class="flex flex-col md:flex-row gap-3">
+                        <div class="relative flex-grow">
+                            <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400"></i>
+                            <input 
+                                type="text" 
+                                id="search-input" 
+                                placeholder="Cari ekstrakurikuler (contoh: Voli, PMR, Pramuka)..." 
+                                class="w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs md:text-sm text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-brand-500 focus:bg-white transition"
+                                oninput="filterEkstra()"
+                            >
+                        </div>
+
+                        <div class="flex flex-wrap items-center gap-1.5 overflow-x-auto pb-1 md:pb-0" id="category-filters">
+                            <!-- Dynamic Buttons via JS -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Grid Card Ekstrakurikuler -->
+                <div id="ekstra-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                    <!-- Dynamic Cards via JS -->
+                </div>
+
+                <!-- Empty Search State -->
+                <div id="empty-state" class="hidden text-center py-12 bg-white rounded-2xl border border-dashed border-slate-300">
+                    <div class="w-12 h-12 bg-slate-100 text-slate-400 rounded-full flex items-center justify-center mx-auto mb-3 text-xl">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </div>
+                    <h3 class="text-sm font-bold text-slate-800">Ekstrakurikuler Tidak Ditemukan</h3>
+                    <p class="text-slate-500 text-xs mt-1 max-w-md mx-auto">Coba gunakan kata kunci pencarian lain atau pilih kategori yang sesuai.</p>
+                    <button onclick="resetEkstraFilters()" class="mt-3 px-4 py-2 bg-brand-600 text-white rounded-xl text-xs font-semibold hover:bg-brand-700 transition">Reset Filter</button>
+                </div>
+            </section>
+
+            <!-- DETAIL VIEW (VIEW DETAIL INDIVIDUAL EKSTRAKURIKULER) -->
+            <section id="ekstra-detail-view" class="hidden page-fade-in space-y-6">
+                <nav class="flex items-center text-xs text-slate-500 space-x-2 overflow-x-auto py-1">
+                    <button onclick="closeEkstraDetail()" class="hover:text-brand-600 flex items-center gap-1 shrink-0">
+                        <i class="fa-solid fa-house text-xs"></i>
+                        <span>Ekstrakurikuler</span>
+                    </button>
+                    <span>/</span>
+                    <span id="detail-breadcrumb-title" class="text-brand-700 font-semibold truncate shrink-0">Detail Ekstra</span>
+                </nav>
+
+                <div class="space-y-2">
+                    <button onclick="closeEkstraDetail()" class="inline-flex items-center gap-2 text-xs text-slate-600 hover:text-brand-600 font-medium transition group mb-1">
+                        <i class="fa-solid fa-arrow-left text-xs group-hover:-translate-x-1 transition-transform"></i>
+                        <span>Kembali ke Daftar Ekstrakurikuler</span>
+                    </button>
+
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-200 pb-4">
+                        <div>
+                            <h2 id="detail-title" class="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
+                                --
+                            </h2>
+                            <div class="flex items-center gap-3 mt-1.5">
+                                <span id="detail-badge-tag" class="px-2.5 py-0.5 rounded-full bg-brand-100 text-brand-700 text-[10px] font-bold uppercase tracking-wider">
+                                    EKSTRAKURIKULER
+                                </span>
+                                <span class="text-xs text-slate-500 flex items-center gap-1.5">
+                                    <i class="fa-regular fa-eye"></i>
+                                    <span id="detail-views">-- kali</span>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
+                    <div class="lg:col-span-2 space-y-6">
+                        <div class="bg-white rounded-2xl p-6 border border-slate-200/80 shadow-sm flex flex-col items-center justify-center text-center relative overflow-hidden">
+                            <div id="detail-emblem-container" class="w-32 h-32 sm:w-40 sm:h-40 rounded-2xl bg-slate-50 p-4 flex items-center justify-center shadow-inner border border-slate-100 relative z-10 mb-3">
+                                <!-- SVG Injected via JS -->
+                            </div>
+                            <h3 id="detail-emblem-caption" class="text-lg font-bold text-slate-800 z-10">
+                                Ekstrakurikuler Spensaka
+                            </h3>
+                            <p class="text-xs text-slate-500 mt-0.5 z-10">SMP Negeri 1 Kandat Kediri</p>
+                        </div>
+
+                        <div class="bg-white rounded-2xl p-6 border border-slate-200/80 shadow-sm space-y-4">
+                            <h3 id="detail-section-heading" class="text-lg font-bold text-slate-900 flex items-center gap-2">
+                                <i class="fa-solid fa-circle-info text-brand-600"></i>
+                                <span>Mengenal Ekstrakurikuler</span>
+                            </h3>
+                            <div id="detail-description" class="text-slate-600 leading-relaxed space-y-2 text-xs md:text-sm">
+                                <!-- Description Injected -->
+                            </div>
+                            <hr class="border-slate-100 my-4">
+                            <div class="space-y-3">
+                                <h4 class="font-bold text-slate-800 uppercase tracking-wider text-xs text-brand-700">Tujuan & Fokus Kegiatan</h4>
+                                <ul id="detail-highlights" class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs text-slate-700">
+                                    <!-- Highlights Injected -->
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="bg-white rounded-2xl p-6 border border-slate-200/80 shadow-sm space-y-4">
+                            <h3 class="text-lg font-bold text-slate-900 flex items-center gap-2">
+                                <i class="fa-solid fa-camera-retro text-brand-600"></i>
+                                <span>Galeri Kegiatan</span>
+                            </h3>
+                            <div id="detail-gallery" class="grid grid-cols-2 sm:grid-cols-3 gap-3">
+                                <!-- Gallery Injected -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="space-y-6">
+                        <div class="bg-white rounded-2xl p-6 border border-slate-200/80 shadow-sm space-y-4">
+                            <div class="flex items-center gap-3">
+                                <div class="w-10 h-10 rounded-xl bg-brand-50 text-brand-600 flex items-center justify-center text-base font-semibold">
+                                    <i class="fa-regular fa-clock"></i>
+                                </div>
+                                <div>
+                                    <h3 class="font-bold text-slate-900 text-sm">Jadwal Latihan</h3>
+                                    <p class="text-[11px] text-slate-500">Rutin Setiap Minggu</p>
+                                </div>
+                            </div>
+                            <div class="bg-slate-50 rounded-xl p-3.5 border border-slate-100 space-y-1.5">
+                                <div id="detail-schedule-text" class="font-bold text-brand-700 text-sm">--</div>
+                                <p class="text-xs text-slate-500 leading-relaxed">
+                                    Diharapkan hadir tepat waktu sebelum sesi latihan/kegiatan dimulai di lokasi sekolah.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="bg-white rounded-2xl p-6 border border-slate-200/80 shadow-sm space-y-4">
+                            <h3 class="font-bold text-slate-900 text-sm">Tertarik Bergabung?</h3>
+                            <div class="text-xs text-slate-600 space-y-2">
+                                <p>Hubungi pembina untuk mengonfirmasi pendaftaran Anda:</p>
+                                <div class="flex items-center gap-2 font-semibold text-slate-800 bg-slate-50 p-2.5 rounded-xl border border-slate-100">
+                                    <i class="fa-solid fa-user-tie text-brand-600"></i>
+                                    <span id="detail-coach">Pembina: --</span>
+                                </div>
+                            </div>
+
+                            <button onclick="openRegistrationModal()" class="w-full py-2.5 px-4 bg-brand-700 hover:bg-brand-800 text-white rounded-xl font-bold text-xs shadow-md transition flex items-center justify-center gap-2">
+                                <i class="fa-solid fa-paper-plane"></i>
+                                <span>Daftar Sekarang via WA</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- TAB 5: KALKULATOR RUBRIK ASESMEN -->
         <div id="tab-kalkulator" class="tab-content hidden space-y-6">
             <div class="bg-white p-6 rounded-2xl shadow-md border border-slate-200 max-w-3xl mx-auto">
-                <h3 class="text-xl font-bold text-slate-800 flex items-center gap-2 mb-2">
-                    <i class="fa-solid fa-calculator text-amber-500"></i> Rubrik Asesmen Capaian Kokurikuler
-                </h3>
+                <div class="border-b pb-4 mb-4">
+                    <h3 class="text-xl font-bold text-slate-800 flex items-center gap-2">
+                        <i class="fa-solid fa-calculator text-amber-500"></i> Kalkulator Rubrik Capaian Kokurikuler 2026
+                    </h3>
+                    <p class="text-slate-500 text-xs mt-1">Alat bantu Guru untuk merekap deskripsi otomatis Capaian Dimensi Profil Lulusan e-Rapor Spensaka.</p>
+                </div>
+
                 <form id="assessment-form" class="space-y-4">
                     <div>
-                        <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Nama Siswa / Kelas:</label>
-                        <input type="text" id="student-name" placeholder="Contoh: Ahmad Risky (Kelas 7B)" class="w-full px-3 py-2 border rounded-lg text-sm focus:ring-2 focus:ring-emerald-500 outline-none">
+                        <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Nama Siswa & Kelas:</label>
+                        <input type="text" id="student-name" placeholder="Contoh: Ahmad Fauzi (Kelas 7A)" class="w-full px-3 py-2 border rounded-lg text-xs md:text-sm focus:ring-2 focus:ring-emerald-500 outline-none">
                     </div>
+
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div>
-                            <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Penalaran Kritis (Pilar 1 & 3):</label>
-                            <select id="score-1" class="w-full px-3 py-2 border rounded-lg text-sm bg-white">
+                            <label class="block text-xs font-bold text-slate-700 uppercase mb-1">1. Penalaran Kritis & Problem Solving:</label>
+                            <select id="score-1" class="w-full px-3 py-2 border rounded-lg text-xs md:text-sm bg-white border-slate-300">
                                 <option value="BB">BB - Belum Berkembang</option>
                                 <option value="MB">MB - Mulai Berkembang</option>
                                 <option value="BSH" selected>BSH - Berkembang Sesuai Harapan</option>
@@ -301,63 +542,599 @@
                             </select>
                         </div>
                         <div>
-                            <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Religiusitas & 7 KAIH (Pilar 2):</label>
-                            <select id="score-2" class="w-full px-3 py-2 border rounded-lg text-sm bg-white">
+                            <label class="block text-xs font-bold text-slate-700 uppercase mb-1">2. Gotong Royong & Kolaborasi:</label>
+                            <select id="score-2" class="w-full px-3 py-2 border rounded-lg text-xs md:text-sm bg-white border-slate-300">
+                                <option value="BB">BB - Belum Berkembang</option>
+                                <option value="MB">MB - Mulai Berkembang</option>
+                                <option value="BSH" selected>BSH - Berkembang Sesuai Harapan</option>
+                                <option value="SB">SB - Sangat Berkembang</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-slate-700 uppercase mb-1">3. Religiusitas & 7 KAIH:</label>
+                            <select id="score-3" class="w-full px-3 py-2 border rounded-lg text-xs md:text-sm bg-white border-slate-300">
                                 <option value="BB">BB - Belum Berkembang</option>
                                 <option value="MB">MB - Mulai Berkembang</option>
                                 <option value="BSH">BSH - Berkembang Sesuai Harapan</option>
                                 <option value="SB" selected>SB - Sangat Berkembang</option>
                             </select>
                         </div>
+                        <div>
+                            <label class="block text-xs font-bold text-slate-700 uppercase mb-1">4. Keunikan Lokal & Digital AI:</label>
+                            <select id="score-4" class="w-full px-3 py-2 border rounded-lg text-xs md:text-sm bg-white border-slate-300">
+                                <option value="BB">BB - Belum Berkembang</option>
+                                <option value="MB">MB - Mulai Berkembang</option>
+                                <option value="BSH" selected>BSH - Berkembang Sesuai Harapan</option>
+                                <option value="SB">SB - Sangat Berkembang</option>
+                            </select>
+                        </div>
                     </div>
-                    <button type="button" onclick="generateReport()" class="w-full bg-emerald-700 hover:bg-emerald-800 text-white font-bold py-2.5 rounded-lg text-sm transition">
-                        Hasilkan Deskripsi Capaian
+
+                    <button type="button" onclick="generateReport()" class="w-full bg-emerald-800 hover:bg-emerald-900 text-white font-bold py-2.5 rounded-lg text-xs md:text-sm transition mt-2 shadow">
+                        <i class="fa-solid fa-file-contract mr-1"></i> Hasikan Narasi e-Rapor Spensaka
                     </button>
                 </form>
-                <div id="result-box" class="hidden mt-6 p-4 bg-emerald-50 border border-emerald-200 rounded-xl">
-                    <h4 class="font-bold text-emerald-900 text-sm mb-1">Hasil Rapor Kokurikuler:</h4>
-                    <p id="result-text" class="text-slate-700 text-xs italic bg-white p-3 rounded border"></p>
+
+                <div id="result-box" class="hidden mt-6 p-4 bg-emerald-50 border border-emerald-300 rounded-xl">
+                    <h4 class="font-bold text-emerald-900 text-xs md:text-sm mb-2"><i class="fa-solid fa-circle-check text-emerald-600 mr-1"></i> Rekap Deskripsi Otomatis e-Rapor Spensaka:</h4>
+                    <p id="result-text" class="text-slate-800 text-xs leading-relaxed bg-white p-3 rounded-lg border italic shadow-sm"></p>
                 </div>
             </div>
         </div>
 
     </main>
 
-    <!-- FOOTER -->
-    <footer class="bg-slate-900 text-slate-400 py-6 border-t border-slate-800 text-xs">
-        <div class="max-w-7xl mx-auto px-4 text-center space-y-2">
-            <div class="flex justify-center items-center gap-2">
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRESVnGGzgEIkf9q6nFxX3TJ2oCPb2g8wWhobdhB6didA&s" class="h-6 w-6 rounded-full bg-white p-0.5" alt="Logo">
-                <span class="font-bold text-white">SMP NEGERI 1 KANDAT</span>
+    <!-- MODAL PENDAFTARAN EKSTRAKURIKULER VIA WHATSAPP -->
+    <div id="registration-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm transition-opacity">
+        <div class="bg-white rounded-2xl max-w-md w-full p-6 shadow-2xl border border-slate-100 relative space-y-4 page-fade-in">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                <div class="flex items-center gap-2">
+                    <div class="w-8 h-8 rounded-lg bg-brand-100 text-brand-700 flex items-center justify-center font-bold text-xs">
+                        <i class="fa-solid fa-file-pen"></i>
+                    </div>
+                    <h3 class="font-bold text-slate-900 text-base">Pendaftaran Ekstrakurikuler</h3>
+                </div>
+                <button onclick="closeRegistrationModal()" class="text-slate-400 hover:text-slate-600 p-1 rounded-lg">
+                    <i class="fa-solid fa-xmark text-lg"></i>
+                </button>
             </div>
-            <p>Jl. Raya Kandat No. 01, Kabupaten Kediri, Jawa Timur</p>
-            <p class="text-slate-500">© 2026 Tim Pengembang Kurikulum Merdeka SMPN 1 Kandat.</p>
+
+            <form id="reg-form" onsubmit="submitRegistration(event)" class="space-y-3">
+                <div>
+                    <label class="block text-[11px] font-semibold text-slate-700 mb-1">Ekstrakurikuler Tujuan</label>
+                    <input type="text" id="form-target-ekstra" readonly class="w-full px-3 py-2 bg-slate-100 border border-slate-200 rounded-xl text-xs font-bold text-brand-700 focus:outline-none">
+                </div>
+
+                <div>
+                    <label class="block text-[11px] font-semibold text-slate-700 mb-1">Nama Lengkap Siswa *</label>
+                    <input type="text" required id="form-name" placeholder="Masukkan nama siswa..." class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs text-slate-800 focus:outline-none focus:ring-2 focus:ring-brand-500">
+                </div>
+
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-[11px] font-semibold text-slate-700 mb-1">Kelas *</label>
+                        <select required id="form-class" class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs text-slate-800 focus:outline-none focus:ring-2 focus:ring-brand-500">
+                            <option value="">Pilih Kelas</option>
+                            <option value="7A">Kelas 7A</option>
+                            <option value="7B">Kelas 7B</option>
+                            <option value="7C">Kelas 7C</option>
+                            <option value="8A">Kelas 8A</option>
+                            <option value="8B">Kelas 8B</option>
+                            <option value="8C">Kelas 8C</option>
+                            <option value="9A">Kelas 9A</option>
+                            <option value="9B">Kelas 9B</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="block text-[11px] font-semibold text-slate-700 mb-1">No. WhatsApp / HP *</label>
+                        <input type="tel" required id="form-phone" placeholder="08xxxxxxxxxx" class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs text-slate-800 focus:outline-none focus:ring-2 focus:ring-brand-500">
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-[11px] font-semibold text-slate-700 mb-1">Alasan Bergabung / Pengalaman</label>
+                    <textarea id="form-reason" rows="2" placeholder="Contoh: Ingin mengasah bakat dan mewakili sekolah..." class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs text-slate-800 focus:outline-none focus:ring-2 focus:ring-brand-500"></textarea>
+                </div>
+
+                <div class="pt-2 flex items-center justify-end gap-2">
+                    <button type="button" onclick="closeRegistrationModal()" class="px-4 py-2 rounded-xl border border-slate-200 text-xs font-semibold text-slate-600 hover:bg-slate-50">Batal</button>
+                    <button type="submit" class="px-4 py-2 rounded-xl bg-brand-700 hover:bg-brand-800 text-white text-xs font-bold shadow-md flex items-center gap-2">
+                        <i class="fa-brands fa-whatsapp text-sm"></i>
+                        <span>Kirim via WhatsApp</span>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="bg-slate-900 text-slate-400 py-8 border-t border-slate-800 text-xs">
+        <div class="max-w-7xl mx-auto px-4 text-center space-y-3">
+            <div class="flex justify-center items-center gap-2">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRESVnGGzgEIkf9q6nFxX3TJ2oCPb2g8wWhobdhB6didA&s" class="h-8 w-8 rounded-full bg-white p-0.5" alt="Logo Spensaka">
+                <span class="font-bold text-white text-sm">SMP NEGERI 1 KANDAT KABUPATEN KEDIRI</span>
+            </div>
+            <p>Jalan Raya Kandat, Kandat, Kediri, Jawa Timur 64173 | Telp: 0354-411440</p>
+            <p class="text-slate-500">© 2026 Tim Pengembang Kurikulum Merdeka Fase D SMPN 1 Kandat. All Rights Reserved.</p>
         </div>
     </footer>
 
+    <!-- JAVASCRIPT LOGIC -->
     <script>
+        // DATASET LENGKAP EKSTRAKURIKULER SPENSAKA
+        const EKSTRA_DATA = [
+            {
+                id: 'voli',
+                name: 'Voli',
+                category: 'Olahraga',
+                schedule: 'Setiap Rabu Jam 14.30 - 16.00',
+                coach: 'Bapak Iwan Sudrajat, S.Pd.',
+                phoneCoach: '6285646230553',
+                shortDesc: 'Ekstrakurikuler bola voli adalah wadah pembinaan olahraga di sekolah yang bertujuan mengembangkan potensi, kebugaran fisik, serta keterampilan teknik bermain.',
+                fullDesc: `Ekstrakurikuler Bola Voli SMPN 1 Kandat merupakan salah satu cabang olahraga terfavorit yang secara konsisten melatih ketangkasan, stamina, dan kerja sama tim. Siswa dibekali dengan teknik dasar passing, service, smash, hingga strategi bertanding dalam turnamen antarsekolah tingkat kabupaten.`,
+                highlights: [
+                    'Latihan teknik dasar & taktik tim',
+                    'Penguatan fisik dan stamina siswa',
+                    'Persiapan Kejuaraan O2SN / Turnamen',
+                    'Pembentukan jiwa sportifitas & solidaritas'
+                ],
+                views: 142,
+                emblemColor: 'from-amber-400 to-blue-600',
+                svgEmblem: `
+                    <svg viewBox="0 0 200 200" class="w-full h-full drop-shadow-md">
+                        <polygon points="100,10 180,50 180,150 100,190 20,150 20,50" fill="#1e1b4b" stroke="#f59e0b" stroke-width="4"/>
+                        <circle cx="100" cy="100" r="45" fill="#3b82f6"/>
+                        <path d="M70,100 Q100,70 130,100 M100,55 L100,145 M75,80 Q100,120 125,80 M75,120 Q100,80 125,120" stroke="#ffffff" stroke-width="3" fill="none"/>
+                        <text x="100" y="172" font-size="12" font-weight="bold" fill="#ffffff" text-anchor="middle">VOLI SPENSAKA</text>
+                    </svg>
+                `,
+                gallery: [
+                    'https://images.unsplash.com/photo-1612872087720-bb876e2e67d1?auto=format&fit=crop&w=600&q=80',
+                    'https://images.unsplash.com/photo-1592656094267-764a45160876?auto=format&fit=crop&w=600&q=80',
+                    'https://images.unsplash.com/photo-1574629810360-7efbbe195018?auto=format&fit=crop&w=600&q=80'
+                ]
+            },
+            {
+                id: 'pik-r',
+                name: 'PIK-R',
+                category: 'Organisasi & Keagamaan',
+                schedule: 'Setiap Selasa Jam 13.30 - Selesai',
+                coach: 'Ibu Rafitra Ferninda Putri, S.Pd.',
+                phoneCoach: '6285755066686',
+                shortDesc: 'Ekstrakurikuler Pusat Informasi dan Konseling Remaja (PIK-R) adalah wadah kegiatan di sekolah untuk pembentukan karakter remaja sebaya.',
+                fullDesc: `PIK-R (Pusat Informasi dan Konseling Remaja) SMPN 1 Kandat berfokus pada pendidikan sebaya, kesehatan reproduksi remaja, ketahanan remaja, perencanaan masa depan, serta pencegahan perundungan (anti-bullying) di lingkungan sekolah.`,
+                highlights: [
+                    'Pelatihan Konselor Sebaya',
+                    'Edukasi Kesehatan Remaja & Gizi',
+                    'Kampanye Anti Bullying & Narkoba',
+                    'Public Speaking & Discussion'
+                ],
+                views: 98,
+                emblemColor: 'from-pink-500 to-rose-600',
+                svgEmblem: `
+                    <svg viewBox="0 0 200 200" class="w-full h-full drop-shadow-md">
+                        <circle cx="100" cy="100" r="85" fill="#f43f5e" stroke="#ffffff" stroke-width="6"/>
+                        <circle cx="100" cy="100" r="70" fill="#ffffff"/>
+                        <path d="M100,50 L120,80 L150,80 L125,100 L135,130 L100,110 L65,130 L75,100 L50,80 L80,80 Z" fill="#fb7185"/>
+                        <circle cx="100" cy="95" r="18" fill="#e11d48"/>
+                        <text x="100" y="160" font-size="14" font-weight="extrabold" fill="#e11d48" text-anchor="middle">PIK-R SPENSAKA</text>
+                    </svg>
+                `,
+                gallery: [
+                    'https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=600&q=80',
+                    'https://images.unsplash.com/photo-1577896851231-70ef18881754?auto=format&fit=crop&w=600&q=80',
+                    'https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=600&q=80'
+                ]
+            },
+            {
+                id: 'pramuka',
+                name: 'Pra-Spensaka (Pramuka)',
+                category: 'Organisasi & Keagamaan',
+                schedule: 'Setiap Sabtu Jam 12.00 - Selesai',
+                coach: 'Kak Wanda Setiawan & Kak Binti Ngafifatul',
+                phoneCoach: '6285649810819',
+                shortDesc: 'PRAMUKA SPENSAKA merupakan kegiatan ekstrakurikuler kepramukaan yang membina kedisiplinan, kepemimpinan, dan kemandirian.',
+                fullDesc: `Pramuka Pra-Spensaka adalah ekstrakurikuler pembinaan karakter yang membentuk kepribadian yang tangguh, cinta alam, berjiwa kepemimpinan, serta memiliki keterampilan kepramukaan seperti Morse, Semapor, pioneering, dan perkemahan bakti.`,
+                highlights: [
+                    'Latihan Keterampilan Kepramukaan (Pioneering, Morse)',
+                    'Perkemahan Sabtu Minggu (Persami)',
+                    'Lomba Tingkat Penggalang',
+                    'Penjelajahan & Bakti Sosial'
+                ],
+                views: 215,
+                emblemColor: 'from-amber-700 to-amber-900',
+                svgEmblem: `
+                    <svg viewBox="0 0 200 200" class="w-full h-full drop-shadow-md">
+                        <polygon points="100,15 175,60 175,140 100,185 25,140 25,60" fill="#78350f" stroke="#f59e0b" stroke-width="5"/>
+                        <circle cx="100" cy="95" r="40" fill="#b45309"/>
+                        <path d="M100,60 L110,90 L140,95 L115,115 L122,145 L100,125 L78,145 L85,115 L60,95 L90,90 Z" fill="#fef3c7"/>
+                        <text x="100" y="170" font-size="11" font-weight="bold" fill="#ffffff" text-anchor="middle">PRA-SPENSAKA</text>
+                    </svg>
+                `,
+                gallery: [
+                    'https://images.unsplash.com/photo-1510312305653-8ed496efae75?auto=format&fit=crop&w=600&q=80',
+                    'https://images.unsplash.com/photo-1478131143081-80f7f84ca84d?auto=format&fit=crop&w=600&q=80',
+                    'https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?auto=format&fit=crop&w=600&q=80'
+                ]
+            },
+            {
+                id: 'pmr',
+                name: 'PMR (Palang Merah Remaja)',
+                category: 'Organisasi & Keagamaan',
+                schedule: 'Setiap Kamis Jam 13.30 - Selesai',
+                coach: 'Ibu Ulul Azmiyah, S.Pd.',
+                phoneCoach: '6285736784701',
+                shortDesc: 'Dengan semangat "Berbakti dan Berani", PMR SMPN 1 Kandat mengajak setiap anggota menjadi remaja yang peduli kemanusiaan dan pertolongan pertama.',
+                fullDesc: `Palang Merah Remaja (PMR) melatih siswa dalam pertolongan pertama (PP), perawatan keluarga (PK), kesiapsiagaan bencana, serta Pola Hidup Bersih dan Sehat (PHBS). Anggota PMR siap bertugas dalam setiap upacara sekolah dan kegiatan sosial.`,
+                highlights: [
+                    'Pelatihan Pertolongan Pertama (PP)',
+                    'Perawatan Keluarga & Kesiapsiagaan Bencana',
+                    'Tugas Kesehatan Upacara Bendera',
+                    'Aksi Donor Darah & Kemanusiaan'
+                ],
+                views: 176,
+                emblemColor: 'from-red-500 to-rose-700',
+                svgEmblem: `
+                    <svg viewBox="0 0 200 200" class="w-full h-full drop-shadow-md">
+                        <rect x="20" y="20" width="160" height="160" rx="35" fill="#ffffff" stroke="#e11d48" stroke-width="8"/>
+                        <path d="M85,50 H115 V85 H150 V115 H115 V150 H85 V115 H50 V85 H85 Z" fill="#e11d48"/>
+                        <text x="100" y="172" font-size="13" font-weight="extrabold" fill="#1e293b" text-anchor="middle">PMR SPENSAKA</text>
+                    </svg>
+                `,
+                gallery: [
+                    'https://images.unsplash.com/photo-1584515979956-d9f6e5d09982?auto=format&fit=crop&w=600&q=80',
+                    'https://images.unsplash.com/photo-1516549655169-df83a0774514?auto=format&fit=crop&w=600&q=80',
+                    'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=600&q=80'
+                ]
+            },
+            {
+                id: 'lenspensaka',
+                name: 'Lenspensaka (Jurnalistik & Fotografi)',
+                category: 'Seni & Budaya',
+                schedule: 'Setiap Selasa Jam 13.30 - Selesai',
+                coach: 'Bapak Kurnia Pangesti, S.Pd.',
+                phoneCoach: '62895395119376',
+                shortDesc: 'Dengan semangat "Abadikan Momen, Ceritakan Inspirasi", LENSPENSAKA mendorong siswa untuk menguasai dunia fotografi dan jurnalistik digital.',
+                fullDesc: `LENSPENSAKA adalah ekstrakurikuler media sekolah yang mengajarkan teknik dasar fotografi kamera & smartphone, videografi, pembuatan konten kreatif sekolah, penulisan berita web, serta desain grafis media sosial.`,
+                highlights: [
+                    'Teknik Dasar Fotografi & Kamera DSLR/HP',
+                    'Penulisan Berita & Jurnalistik Sekolah',
+                    'Editing Video & Desain Grafis',
+                    'Liputan Event & Acara Resmi Sekolah'
+                ],
+                views: 110,
+                emblemColor: 'from-sky-500 to-indigo-600',
+                svgEmblem: `
+                    <svg viewBox="0 0 200 200" class="w-full h-full drop-shadow-md">
+                        <rect x="20" y="30" width="160" height="140" rx="25" fill="#0284c7" stroke="#38bdf8" stroke-width="4"/>
+                        <circle cx="100" cy="100" r="40" fill="#0f172a" stroke="#ffffff" stroke-width="5"/>
+                        <circle cx="100" cy="100" r="22" fill="#38bdf8"/>
+                        <circle cx="145" cy="60" r="8" fill="#facc15"/>
+                        <text x="100" y="162" font-size="11" font-weight="bold" fill="#ffffff" text-anchor="middle">LENSPENSAKA</text>
+                    </svg>
+                `,
+                gallery: [
+                    'https://images.unsplash.com/photo-1516035069371-29a1b244cc32?auto=format&fit=crop&w=600&q=80',
+                    'https://images.unsplash.com/photo-1452587925148-ce544e77e70d?auto=format&fit=crop&w=600&q=80',
+                    'https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?auto=format&fit=crop&w=600&q=80'
+                ]
+            },
+            {
+                id: 'rebana',
+                name: 'Rebana & Hadrah',
+                category: 'Seni & Budaya',
+                schedule: 'Setiap Rabu Jam 14.00 - 15.30',
+                coach: 'Ust. M. Ilham',
+                phoneCoach: '6285935185128',
+                shortDesc: '"Melantunkan Syiar, Mengukir Prestasi" Rebana Spensaka adalah wadah pengembangan bakat seni musik islami dan spiritualitas.',
+                fullDesc: `Ekstrakurikuler Rebana & Hadrah SMPN 1 Kandat melatih seni musik bernuansa Islami. Siswa mempelajari Pukulan Terbang (Keprak, Bass, Banjari), vokal shalawat, serta harmoni panggung untuk penampilan peringatan hari besar Islam dan lomba seni.`,
+                highlights: [
+                    'Pukulan Variasi Hadrah Banjari',
+                    'Olah Vokal & Harmoni Shalawat',
+                    'Tampil di Acara Peringatan Hari Besar Islam (PHBI)',
+                    'Mengikuti Festival Seni Rebana Kabupaten'
+                ],
+                views: 89,
+                emblemColor: 'from-emerald-600 to-teal-800',
+                svgEmblem: `
+                    <svg viewBox="0 0 200 200" class="w-full h-full drop-shadow-md">
+                        <circle cx="100" cy="100" r="80" fill="#047857" stroke="#34d399" stroke-width="6"/>
+                        <circle cx="100" cy="100" r="62" fill="#fef3c7" stroke="#d97706" stroke-width="4"/>
+                        <path d="M100,55 L108,80 L135,80 L112,96 L120,122 L100,105 L80,122 L88,96 L65,80 L92,80 Z" fill="#059669"/>
+                        <text x="100" y="152" font-size="12" font-weight="bold" fill="#064e3b" text-anchor="middle">REBANA SPENSAKA</text>
+                    </svg>
+                `,
+                gallery: [
+                    'https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=600&q=80',
+                    'https://images.unsplash.com/photo-1465847899084-d164df4dedc6?auto=format&fit=crop&w=600&q=80',
+                    'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=600&q=80'
+                ]
+            },
+            {
+                id: 'futsal',
+                name: 'Futsal & Sepakbola',
+                category: 'Olahraga',
+                schedule: 'Setiap Jumat Jam 15.00 - 17.00',
+                coach: 'Coach Mr. Sunyoto',
+                phoneCoach: '6285730214817',
+                shortDesc: 'Wadah pengembangan bakat olah bola futsal yang melatih fisik, taktik tim, dan sportifitas dalam berolahraga.',
+                fullDesc: `Tim Futsal Spensaka secara intensif mengadakan latihan fisik, kontrol bola, strategi transisi penyerangan dan pertahanan, serta pertandingan persahabatan antar sekolah guna mempersiapkan turnamen Liga Futsal SMP.`,
+                highlights: [
+                    'Latihan Formasi & Taktik Futsal',
+                    'Peningkatan Kondisi Fisik & Kebugaran',
+                    'Uji Tanding / Friendly Match',
+                    'Keikutsertaan Turnamen Kabupaten Kediri'
+                ],
+                views: 195,
+                emblemColor: 'from-green-600 to-emerald-800',
+                svgEmblem: `
+                    <svg viewBox="0 0 200 200" class="w-full h-full drop-shadow-md">
+                        <polygon points="100,15 180,55 180,145 100,185 20,145 20,55" fill="#15803d" stroke="#86efac" stroke-width="5"/>
+                        <circle cx="100" cy="100" r="45" fill="#ffffff"/>
+                        <polygon points="100,75 115,88 110,108 90,108 85,88" fill="#15803d"/>
+                        <text x="100" y="170" font-size="12" font-weight="bold" fill="#ffffff" text-anchor="middle">FUTSAL SPENSAKA</text>
+                    </svg>
+                `,
+                gallery: [
+                    'https://images.unsplash.com/photo-1574629810360-7efbbe195018?auto=format&fit=crop&w=600&q=80',
+                    'https://images.unsplash.com/photo-1508098682722-e99c43a406b2?auto=format&fit=crop&w=600&q=80',
+                    'https://images.unsplash.com/photo-1517466787929-bc90951d0974?auto=format&fit=crop&w=600&q=80'
+                ]
+            },
+            {
+                id: 'english-club',
+                name: 'English Club (Spensaka EC)',
+                category: 'Akademik & Sains',
+                schedule: 'Setiap Kamis Jam 14.00 - 15.30',
+                coach: 'Damara Ilham, S.Pd.',
+                phoneCoach: '6285736459964',
+                shortDesc: 'Mengembangkan rasa percaya diri dan kemampuan bahasa Inggris siswa melalui Public Speaking, Storytelling, dan Debate.',
+                fullDesc: `English Club SMPN 1 Kandat menyajikan suasana belajar Bahasa Inggris yang menyenangkan (Fun Learning). Siswa dilatih berani berbicara (speaking), mendongeng (storytelling), berpidato (speech), dan berdiskusi interaktif.`,
+                highlights: [
+                    'English Conversation Practice',
+                    'Storytelling & Speech Competition Prep',
+                    'Fun Educational Games & Scrabble',
+                    'Peningkatan Confidence & Vocabulary'
+                ],
+                views: 104,
+                emblemColor: 'from-indigo-600 to-purple-800',
+                svgEmblem: `
+                    <svg viewBox="0 0 200 200" class="w-full h-full drop-shadow-md">
+                        <circle cx="100" cy="100" r="80" fill="#4338ca" stroke="#a5b4fc" stroke-width="6"/>
+                        <text x="100" y="95" font-size="38" font-weight="extrabold" fill="#ffffff" text-anchor="middle">ENGLISH</text>
+                        <text x="100" y="125" font-size="20" font-weight="bold" fill="#facc15" text-anchor="middle">CLUB</text>
+                        <text x="100" y="155" font-size="10" font-weight="bold" fill="#ffffff" text-anchor="middle">SPENSAKA</text>
+                    </svg>
+                `,
+                gallery: [
+                    'https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=600&q=80',
+                    'https://images.unsplash.com/photo-1577896851231-70ef18881754?auto=format&fit=crop&w=600&q=80',
+                    'https://images.unsplash.com/photo-1434030216411-0b793f4b4173?auto=format&fit=crop&w=600&q=80'
+                ]
+            }
+        ];
+
+        let activeCategory = 'Semua';
+        let searchQuery = '';
+        let currentDetailSlug = null;
+        const CATEGORIES = ['Semua', 'Olahraga', 'Seni & Budaya', 'Organisasi & Keagamaan', 'Akademik & Sains'];
+
+        // SWITCH TAB UTAMA
         function switchTab(tabId) {
             document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
             document.querySelectorAll('.tab-btn').forEach(btn => {
-                btn.classList.remove('bg-emerald-700', 'text-white');
-                btn.classList.add('hover:bg-emerald-700', 'hover:text-white');
+                if (btn.id !== 'btn-kalkulator') {
+                    btn.classList.remove('bg-emerald-700', 'text-white');
+                    btn.classList.add('hover:bg-emerald-700', 'hover:text-white');
+                }
             });
+
             document.getElementById('tab-' + tabId).classList.remove('hidden');
             const activeBtn = document.getElementById('btn-' + tabId);
             if (activeBtn && tabId !== 'kalkulator') {
                 activeBtn.classList.add('bg-emerald-700', 'text-white');
             }
+
+            if(tabId === 'ekstrakurikuler') {
+                initCategoryFilters();
+                filterEkstra();
+            }
+
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
         function toggleMobileMenu() {
-            document.getElementById('nav-menu').classList.toggle('hidden');
+            const nav = document.getElementById('nav-menu');
+            nav.classList.toggle('hidden');
+        }
+
+        // FUNGSI MODUL EKSTRAKURIKULER
+        function initCategoryFilters() {
+            const container = document.getElementById('category-filters');
+            if(!container) return;
+            container.innerHTML = CATEGORIES.map(cat => `
+                <button 
+                    onclick="selectCategory('${cat}')"
+                    class="px-3 py-1 rounded-xl text-xs font-semibold whitespace-nowrap transition-all ${
+                        activeCategory === cat 
+                        ? 'bg-brand-700 text-white shadow-sm' 
+                        : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
+                    }"
+                >
+                    ${cat}
+                </button>
+            `).join('');
+        }
+
+        function selectCategory(cat) {
+            activeCategory = cat;
+            initCategoryFilters();
+            filterEkstra();
+        }
+
+        function resetEkstraFilters() {
+            activeCategory = 'Semua';
+            searchQuery = '';
+            document.getElementById('search-input').value = '';
+            initCategoryFilters();
+            filterEkstra();
+        }
+
+        function filterEkstra() {
+            const input = document.getElementById('search-input');
+            if(!input) return;
+            searchQuery = input.value.toLowerCase().trim();
+
+            const filtered = EKSTRA_DATA.filter(item => {
+                const matchesCat = (activeCategory === 'Semua') || (item.category === activeCategory);
+                const matchesSearch = item.name.toLowerCase().includes(searchQuery) || 
+                                      item.shortDesc.toLowerCase().includes(searchQuery) ||
+                                      item.category.toLowerCase().includes(searchQuery);
+                return matchesCat && matchesSearch;
+            });
+
+            renderEkstraGrid(filtered);
+        }
+
+        function renderEkstraGrid(items) {
+            const grid = document.getElementById('ekstra-grid');
+            const emptyState = document.getElementById('empty-state');
+            if(!grid) return;
+
+            if (items.length === 0) {
+                grid.innerHTML = '';
+                emptyState.classList.remove('hidden');
+                return;
+            }
+
+            emptyState.classList.add('hidden');
+            grid.innerHTML = items.map(item => `
+                <div 
+                    onclick="openEkstraDetail('${item.id}')"
+                    class="bg-white rounded-2xl p-5 border border-slate-200/80 shadow-sm hover:shadow-md transition-all duration-300 cursor-pointer group flex flex-col justify-between badge-hover-effect relative overflow-hidden"
+                >
+                    <div class="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r ${item.emblemColor}"></div>
+                    <div class="space-y-3">
+                        <div class="w-14 h-14 mx-auto rounded-2xl bg-slate-50 border border-slate-100 p-2 flex items-center justify-center group-hover:scale-110 transition-transform">
+                            ${item.svgEmblem}
+                        </div>
+                        <div class="text-center space-y-1">
+                            <h3 class="font-bold text-slate-900 text-base group-hover:text-brand-600 transition-colors">
+                                ${item.name}
+                            </h3>
+                            <div class="inline-flex items-center gap-1 text-[11px] text-brand-700 font-semibold bg-brand-50 px-2 py-0.5 rounded-lg">
+                                <i class="fa-regular fa-clock text-[9px]"></i>
+                                <span>${item.schedule}</span>
+                            </div>
+                        </div>
+                        <p class="text-xs text-slate-500 text-center leading-relaxed line-clamp-2">
+                            ${item.shortDesc}
+                        </p>
+                    </div>
+
+                    <div class="pt-3 mt-2 border-t border-slate-100 flex items-center justify-between text-[11px] text-slate-400">
+                        <span class="font-medium text-slate-600">${item.category}</span>
+                        <span class="font-semibold text-brand-600 group-hover:translate-x-1 transition-transform inline-flex items-center gap-1">
+                            Detail <i class="fa-solid fa-chevron-right text-[8px]"></i>
+                        </span>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function openEkstraDetail(slug) {
+            const item = EKSTRA_DATA.find(e => e.id === slug);
+            if(!item) return;
+
+            currentDetailSlug = slug;
+            document.getElementById('detail-breadcrumb-title').textContent = item.name;
+            document.getElementById('detail-title').textContent = item.name;
+            
+            const storedViews = parseInt(localStorage.getItem(`views_${item.id}`) || item.views);
+            const newViews = storedViews + 1;
+            localStorage.setItem(`views_${item.id}`, newViews);
+            document.getElementById('detail-views').textContent = `${newViews} kali dilihat`;
+
+            document.getElementById('detail-emblem-container').innerHTML = item.svgEmblem;
+            document.getElementById('detail-emblem-caption').textContent = `Ekstrakurikuler ${item.name}`;
+
+            document.getElementById('detail-section-heading').innerHTML = `
+                <i class="fa-solid fa-circle-info text-brand-600"></i>
+                <span>Mengenal ${item.name}</span>
+            `;
+            document.getElementById('detail-description').innerHTML = `
+                <p>${item.fullDesc}</p>
+                <p class="text-xs text-slate-500 italic mt-1">
+                    Gugus Ekstrakurikuler SMP Negeri 1 Kandat secara aktif mendukung pembentukan minat siswa serta persiapan lomba antarsekolah.
+                </p>
+            `;
+
+            document.getElementById('detail-highlights').innerHTML = item.highlights.map(h => `
+                <li class="flex items-start gap-2 bg-slate-50 p-2 rounded-xl border border-slate-100">
+                    <i class="fa-solid fa-circle-check text-emerald-500 text-xs mt-0.5"></i>
+                    <span>${h}</span>
+                </li>
+            `).join('');
+
+            document.getElementById('detail-schedule-text').textContent = item.schedule;
+            document.getElementById('detail-coach').textContent = item.coach;
+            document.getElementById('form-target-ekstra').value = item.name;
+
+            document.getElementById('detail-gallery').innerHTML = item.gallery.map((imgUrl, idx) => `
+                <div class="group relative rounded-xl overflow-hidden aspect-video bg-slate-100 shadow-sm">
+                    <img 
+                        src="${imgUrl}" 
+                        alt="Foto Kegiatan ${item.name}"
+                        class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                        onerror="this.src='https://placehold.co/600x400/4338ca/ffffff?text=Dokumentasi+Spensaka'"
+                    >
+                </div>
+            `).join('');
+
+            document.getElementById('ekstra-list-view').classList.add('hidden');
+            document.getElementById('ekstra-detail-view').classList.remove('hidden');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function closeEkstraDetail() {
+            document.getElementById('ekstra-list-view').classList.remove('hidden');
+            document.getElementById('ekstra-detail-view').classList.add('hidden');
+        }
+
+        function openRegistrationModal() {
+            document.getElementById('registration-modal').classList.remove('hidden');
+        }
+
+        function closeRegistrationModal() {
+            document.getElementById('registration-modal').classList.add('hidden');
+        }
+
+        function submitRegistration(event) {
+            event.preventDefault();
+            const item = EKSTRA_DATA.find(e => e.id === currentDetailSlug) || EKSTRA_DATA[0];
+            const name = document.getElementById('form-name').value.trim();
+            const studentClass = document.getElementById('form-class').value;
+            const phone = document.getElementById('form-phone').value.trim();
+            const reason = document.getElementById('form-reason').value.trim();
+
+            const textMessage = `Halo Pembina Ekstrakurikuler ${item.name} SMPN 1 Kandat,\n\nSaya ingin mendaftar ekstrakurikuler *${item.name}*:\n- *Nama*: ${name}\n- *Kelas*: ${studentClass}\n- *No HP*: ${phone}\n- *Alasan*: ${reason || '-'}\n\nMohon konfirmasi pendaftaran saya. Terima kasih!`;
+
+            const waUrl = `https://wa.me/${item.phoneCoach}?text=${encodeURIComponent(textMessage)}`;
+            closeRegistrationModal();
+            document.getElementById('reg-form').reset();
+            window.open(waUrl, '_blank');
         }
 
         function generateReport() {
             const name = document.getElementById('student-name').value || "Siswa";
             const s1 = document.getElementById('score-1').value;
             const s2 = document.getElementById('score-2').value;
-            const text = `Peserta didik atas nama ${name} menunjukkan capaian yang sangat baik pada program Kokurikuler 3 Pilar TA 2026/2027. Pada Dimensi Penalaran Kritis & Inovasi Lingkungan (Pilar 1 & 3) mencapai [${s1}], serta pada Pembiasaan 7 KAIH & Religiusitas (Pilar 2) mencapai [${s2}].`;
+            const s3 = document.getElementById('score-3').value;
+            const s4 = document.getElementById('score-4').value;
+
+            const text = `Peserta didik atas nama ${name} menunjukkan performa unggul dalam Kegiatan Kokurikuler 2026/2027. Pada dimensi Religiusitas & 7 KAIH memperoleh capaian [${s3}], Gotong Royong & Kolaborasi ASRI [${s2}], Penalaran Kritis & Problem Solving [${s1}], serta Keunikan Lokal Kediri & Digital AI [${s4}]. Yang bersangkutan secara konsisten mencerminkan karakter siswa Spensaka yang agamis, peduli lingkungan, dan inovatif.`;
+
             document.getElementById('result-text').innerText = text;
             document.getElementById('result-box').classList.remove('hidden');
         }
